@@ -25,14 +25,14 @@ private:
 	size_t buffer, count_of_files, closed_files;
 	bool out;
 	vector<string> lines;
-	vector<string> file_names;//имена временных файлов
+	vector<string> file_names;
 };
 
 SortClass::~SortClass() {
 	file_names.clear();
 }
 
-SortClass::SortClass(string name_main_file) :file(name_main_file), buffer(100), count_of_files(0), closed_files(0) {//TESTED
+SortClass::SortClass(string name_main_file) :file(name_main_file), buffer(100), count_of_files(0), closed_files(0) {
 	if (file.is_open()) {
 		out=true;
 		divide();
@@ -118,7 +118,6 @@ auto SortClass::sort()->void {
 		}
 	}
 	for(int i=0;i<count_of_files;++i) files_streams[i].close();
-
 	deleteTmp();
 }
 
