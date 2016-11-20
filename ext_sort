@@ -60,7 +60,6 @@ auto SortClass::size(string name_file)->size_t {
 	fsize = temp.tellg();
 	temp.close();
 	return fsize;
-
 }
 
 auto SortClass::writeSorted(string line)->void {
