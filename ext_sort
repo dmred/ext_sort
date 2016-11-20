@@ -67,7 +67,6 @@ auto SortClass::writeSorted(string line)->void {
 	if(!out.is_open) throw;
 	file << line << endl;
 	file.close();
-
 }
 
 auto SortClass::deleteTmp()->void {
