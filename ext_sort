@@ -116,7 +116,6 @@ auto SortClass::sort()->void {
 			closed_files++;
 			if (closed_files == count_of_files) { out = false; };
 		}
-
 	}
 	for(int i=0;i<count_of_files;++i) files_streams[i].close();
 
