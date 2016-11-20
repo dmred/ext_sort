@@ -119,7 +119,6 @@ auto SortClass::sort()->void {
 		}
 
 	}
-
 	for(int i=0;i<count_of_files;++i) files_streams[i].close();
 
 	deleteTmp();
