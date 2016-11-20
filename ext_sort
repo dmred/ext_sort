@@ -84,7 +84,6 @@ auto SortClass::sort()->void {
 	for (int i = 0; i < count_of_files; ++i) {
 		files_streams[i].open(file_names[i]);
 	}
-
 	string *top_line = new string[count_of_files];
 	for (unsigned int i = 0; i < count_of_files; ++i)
 	{
