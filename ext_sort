@@ -133,7 +133,6 @@ auto SortClass::division()->void {
 		}
 		else {
 			count_of_files++;
-
 			make_file(to_string(count_of_files) + ".txt");
 			lines.push_back(line_of_file);
 			temp_size_files = line_of_file.size();
