@@ -136,7 +136,6 @@ auto SortClass::division()->void {
 		}
 	}
 	file.close();
-
 	if (lines.size()) {
 		count_of_files++;
 		make_file(to_string(count_of_files) + ".txt");
