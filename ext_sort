@@ -93,7 +93,6 @@ auto SortClass::sort()->void {
 	while (out == true) {
 		string temp_min_line = top_line[0];
 		int num_min_line = 0;
-
 		for (int i = 0; i < count_of_files; ++i)
 		{
 			if (top_line[i] < temp_min_line)
