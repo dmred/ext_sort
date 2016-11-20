@@ -113,7 +113,6 @@ auto SortClass::sort()->void {
 			getline(files_streams[num_min_line], top_line[num_min_line]);
 		}
 		else {
-			
 			closed_files++;
 			if (closed_files == count_of_files) { out = false; };
 		}
