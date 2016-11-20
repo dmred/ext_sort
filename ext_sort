@@ -3,6 +3,12 @@
 #include <string>
 #include <vector>
 
+//		╔══╦══╦═══╦════╦══╦╗─╔╦═══╦══╦╗─╔══╦══╦══╗
+//		║╔═╣╔╗║╔═╗╠═╗╔═╩╗╔╣╚═╝║╔══╣╔═╣║─║╔╗║╔═╣╔═╝
+//		║╚═╣║║║╚═╝║─║║──║║║╔╗─║║╔═╣║─║║─║╚╝║╚═╣╚═╗
+//		╚═╗║║║║╔╗╔╝─║║──║║║║╚╗║║╚╗║║─║║─║╔╗╠═╗╠═╗║
+//		╔═╝║╚╝║║║║──║║─╔╝╚╣║─║║╚═╝║╚═╣╚═╣║║╠═╝╠═╝║
+//		╚══╩══╩╝╚╝──╚╝─╚══╩╝─╚╩═══╩══╩══╩╝╚╩══╩══╝
 
 class SortClass {
 public:
@@ -57,7 +63,7 @@ auto SortClass::size(string name_file)->size_t {
 
 }
 
-auto SortClass::writeSorted(string line)->void {//TESTED
+auto SortClass::writeSorted(string line)->void {
 	ofstream out("out.txt", ios::app);
 	if(!out.is_open) throw;
 	file << line << endl;
@@ -147,8 +153,6 @@ auto SortClass::division()->void {
 		count_of_files++;
 		make_file(to_string(count_of_files) + ".txt");
 	}
-
-
 	sort();
 };
 
@@ -157,11 +161,7 @@ int main()
 {
 	setlocale(LC_ALL, "Russian");
 	SortClass obj("names.txt");
-
-	
-
-
-	system("pause");
+	getch();
 	return 0;
 }
 */
