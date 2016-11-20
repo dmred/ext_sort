@@ -131,8 +131,6 @@ auto SortClass::division()->void {
 	while (!file.eof()) {
 		getline(file, line_of_file);
 		temp_size_files += line_of_file.size();
-
-
 		if (temp_size_files <= buffer) {
 			lines.push_back(line_of_file);
 		}
