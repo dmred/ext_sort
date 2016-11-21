@@ -37,6 +37,7 @@ public:
 	auto toSort()->void;//сортировка всех блоков
 	auto writeSorted(string )->void;//запись сортированных данных в файл
 	auto deleteTmps()->void;//удаление временных файлов
+	auto fio() -> const bool; //открытый
 	~ClassSort();//destr
 private:
 	fstream file;
@@ -48,17 +49,17 @@ private:
 	priority_queue<A> pq;
 };
 
-
-
 ClassSort::~ClassSort() {
 	file_names.clear();
 }
 
-ClassSort::ClassSort(string name_main_file, size_t tmp_size) :file(name_main_file), tmp(tmp_size), countTmps(0), closedFiles(0) {
+auto ClassSort::ClassSort(string name_main_file, size_t tmp_size) :file(name_main_file), tmp(tmp_size), countTmps(0), closedFiles(0) {
 	if (file.is_open()) {
 		divide();
 	}
 };
+
+auto ClassSort::fio() -> const bool{return (file.is_open());}
 
 auto ClassSort::makeTmp(string name_file)->void {
 	file_names.push_back(name_file);
