@@ -132,7 +132,6 @@ auto ClassSort::toSort()->void {
 	file1.close();
 }
 
-
 auto ClassSort::divide()->void {
 	string line_of_file;
 	size_t temp_size_files = 0;
@@ -157,6 +156,5 @@ auto ClassSort::divide()->void {
 		countTmps++;
 		makeTmp(to_string(countTmps) + ".txt");
 	}
-
 	toSort();
 }
