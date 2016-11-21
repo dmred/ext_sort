@@ -1,7 +1,26 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <vector>
+#include <iostream> 
+#include <fstream> 
+#include <string> 
+#include <vector> 
+#include <locale> 
+#include <iterator> 
+#include <algorithm> 
+#include <cstdio> 
+#include <stdlib.h>
+#include <queue> 
+
+using namespace std;
+
+struct STR {
+public:
+	int index;
+	string str;
+	STR(const string s, const size_t i) : str(s), index(i) {}
+	bool operator < (const STR& s) const
+	{
+		return (str > s.str);
+	}
+};
 
 //		╔══╦══╦═══╦════╦══╦╗─╔╦═══╦══╦╗─╔══╦══╦══╗
 //		║╔═╣╔╗║╔═╗╠═╗╔═╩╗╔╣╚═╝║╔══╣╔═╣║─║╔╗║╔═╣╔═╝
@@ -10,40 +29,50 @@
 //		╔═╝║╚╝║║║║──║║─╔╝╚╣║─║║╚═╝║╚═╣╚═╣║║╠═╝╠═╝║
 //		╚══╩══╩╝╚╝──╚╝─╚══╩╝─╚╩═══╩══╩══╩╝╚╩══╩══╝
 
-class SortClass {
-public:
-	SortClass(string );//открытие файла
-	auto divide()->void; // разделение на блоки
-	auto size(string )->size_t;//размер файла
-	auto makeBlocks(string )->void;//создание блоков
-	auto  sort()->void;//сортировка всех блоков
-	auto writeSorted(string )->void;//запись сортированных данных в файл
-	auto deleteTmp()->void;//удаление временных файлов
+	SortClass(string );
+	auto divide()->void;
+	auto size(string )->size_t;
+	auto makeBlocks(string )->void;
+	auto  sort()->void;
+	auto writeSorted(string )->void;
+	auto deleteTmp()->void;
 	~SortClass();
+class ClassSort {
+public:
+	ClassSort(string name_main_file, size_t tmp_size);//открытие файла
+	auto divide()->void; // разделение на блоки
+	auto fileSize(string )->size_t;//размер файла
+	auto makeTmp(string )->void;//создание блоков
+	auto toSort()->void;//сортировка всех блоков
+	auto writeSorted(string )->void;//запись сортированных данных в файл
+	auto deleteTmps()->void;//удаление временных файлов
+	~ClassSort();//destr
 private:
 	fstream file;
-	size_t buffer, count_of_files, closed_files;
-	bool out;
+	size_t tmp;
+	size_t countTmps;
+	size_t closedFiles;
 	vector<string> lines;
 	vector<string> file_names;
+	priority_queue<A> pq;
 };
 
-SortClass::~SortClass() {
+
+
+ClassSort::~ClassSort() {
 	file_names.clear();
 }
 
-SortClass::SortClass(string name_main_file) :file(name_main_file), buffer(100), count_of_files(0), closed_files(0) {
+ClassSort::ClassSort(string name_main_file, size_t tmp_size) :file(name_main_file), tmp(tmp_size), countTmps(0), closedFiles(0) {
 	if (file.is_open()) {
-		out=true;
 		divide();
 	}
 };
 
-auto SortClass::makeBlocks(string name_file)->void {
+auto ClassSort::makeTmp(string name_file)->void {
 	file_names.push_back(name_file);
 	std::sort(lines.begin(), lines.end());
 	ofstream temp(name_file);
-	if (!temp.is_open()) throw;
 	for (auto i : lines)
 	{
 		temp << i;
@@ -53,23 +82,24 @@ auto SortClass::makeBlocks(string name_file)->void {
 	lines.clear();
 }
 
-auto SortClass::size(string name_file)->size_t { 
+auto ClassSort::fileSize(string name_file)->size_t {
 	long fsize;
 	ifstream temp(name_file);
 	temp.seekg(0, ios::end);
 	fsize = temp.tellg();
 	temp.close();
 	return fsize;
+
 }
 
-auto SortClass::writeSorted(string line)->void {
-	ofstream out("out.txt", ios::app);
-	if(!out.is_open) throw;
+auto ClassSort::writeSorted(string line)->void {
+	ofstream file("out.txt", ios::app);
 	file << line << endl;
 	file.close();
+
 }
 
-auto SortClass::deleteTmp()->void {
+auto ClassSort::deleteTmps()->void {
 	for (int i = 0; i < file_names.size(); ++i) {
 		if (remove(file_names[i].c_str()) == -1) {
 			throw;
@@ -82,73 +112,60 @@ auto SortClass::deleteTmp()->void {
 }
 
 
-auto SortClass::sort()->void {
-	ifstream *files_streams = new ifstream[count_of_files];
-	for (int i = 0; i < count_of_files; ++i) {
-		files_streams[i].open(file_names[i]);
-	}
-	string *top_line = new string[count_of_files];
-	for (unsigned int i = 0; i < count_of_files; ++i)
-	{
-		getline(files_streams[i], top_line[i]);
+
+
+auto ClassSort::toSort()->void {
+	ofstream file1("out.txt");
+	string str;
+	ifstream *streams = new ifstream[countTmps];
+	for (int i = 0; i < countTmps; ++i) {
+		streams[i].open(file_names[i]);
+		getline(streams[i], str);
+		A ff(str, i);
+		pq.push(ff);
 	}
 
-	while (out == true) {
-		string temp_min_line = top_line[0];
-		int num_min_line = 0;
-		for (int i = 0; i < count_of_files; ++i)
+	while (!pq.empty()) {
+		A ff = pq.top();
+		pq.pop();
+		if (ff.str != "")file1 << ff.str << endl;
+
+		if (!streams[ff.index].eof())
 		{
-			if (top_line[i] < temp_min_line)
-			{
-				temp_min_line = top_line[i];
-				num_min_line = i;
-			}
-		}
-		writeSorted(temp_min_line);
-		if (!files_streams[num_min_line].eof())
-		{
-			getline(files_streams[num_min_line], top_line[num_min_line]);
-		}
-		else {
-			closed_files++;
-			if (closed_files == count_of_files) { out = false; };
+			getline(streams[ff.index], ff.str);
+			pq.push(ff);
 		}
 	}
-	for(int i=0;i<count_of_files;++i) files_streams[i].close();
-	deleteTmp();
+	for (int i = 0; i < countTmps; ++i) streams[i].close();
+	deleteTmps();
+	file1.close();
 }
 
 
-auto SortClass::division()->void {
+auto ClassSort::divide()->void {
 	string line_of_file;
 	size_t temp_size_files = 0;
 	while (!file.eof()) {
 		getline(file, line_of_file);
 		temp_size_files += line_of_file.size();
-		if (temp_size_files <= buffer) {
+
+
+		if (temp_size_files <= tmp) {
 			lines.push_back(line_of_file);
 		}
 		else {
-			count_of_files++;
-			make_file(to_string(count_of_files) + ".txt");
+			countTmps++;
+			makeTmp(to_string(countTmps) + ".txt");
 			lines.push_back(line_of_file);
 			temp_size_files = line_of_file.size();
 		}
 	}
 	file.close();
-	if (lines.size()) {
-		count_of_files++;
-		make_file(to_string(count_of_files) + ".txt");
-	}
-	sort();
-};
 
-/*
-int main()
-{
-	setlocale(LC_ALL, "Russian");
-	SortClass obj("names.txt");
-	getch();
-	return 0;
+	if (lines.size()) {
+		countTmps++;
+		makeTmp(to_string(countTmps) + ".txt");
+	}
+
+	toSort();
 }
-*/
