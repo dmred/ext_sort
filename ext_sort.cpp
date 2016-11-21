@@ -67,7 +67,7 @@ auto ClassSort::makeTmp(string name_file)->void {
 	for (auto i : lines)
 	{
 		temp << i;
-		if (i != *(--lines.end())) temp << endl;
+		if (i != *(lines.end()--)) temp << endl;
 	}
 	temp.close();
 	lines.clear();
@@ -80,14 +80,12 @@ auto ClassSort::fileSize(string name_file)->size_t {
 	fsize = temp.tellg();
 	temp.close();
 	return fsize;
-
 }
 
 auto ClassSort::writeSorted(string line)->void {
 	ofstream file("out.txt", ios::app);
 	file << line << endl;
 	file.close();
-
 }
 
 auto ClassSort::deleteTmps()->void {
