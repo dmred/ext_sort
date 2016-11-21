@@ -8,7 +8,6 @@
 #include <iterator> 
 #include <stdlib.h>
 
-
 using namespace std;
 
 struct STR {
