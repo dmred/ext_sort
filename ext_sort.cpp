@@ -1,13 +1,13 @@
 #include <iostream> 
 #include <fstream> 
 #include <string> 
+#include <algorithm>
 #include <vector> 
 #include <locale> 
-#include <iterator> 
-#include <algorithm> 
-#include <cstdio> 
-#include <stdlib.h>
 #include <queue> 
+#include <iterator> 
+#include <stdlib.h>
+
 
 using namespace std;
 
@@ -15,7 +15,7 @@ struct STR {
 public:
 	int index;
 	string str;
-	STR(const string s, const size_t i) : str(s), index(i) {}
+	STR(string s, size_t i) : str(s), index(i) {}
 	bool operator < (const STR& s) const
 	{
 		return (str > s.str);
