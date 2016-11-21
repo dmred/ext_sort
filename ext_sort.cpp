@@ -100,9 +100,6 @@ auto ClassSort::deleteTmps()->void {
 
 }
 
-
-
-
 auto ClassSort::toSort()->void {
 	ofstream file1("out.txt");
 	string str;
