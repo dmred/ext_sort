@@ -97,7 +97,6 @@ auto ClassSort::deleteTmps()->void {
 			cout << "Gj";
 		}
 	}
-
 }
 
 auto ClassSort::toSort()->void {
