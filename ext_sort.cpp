@@ -28,15 +28,6 @@ public:
 //		╚═╗║║║║╔╗╔╝─║║──║║║║╚╗║║╚╗║║─║║─║╔╗╠═╗╠═╗║
 //		╔═╝║╚╝║║║║──║║─╔╝╚╣║─║║╚═╝║╚═╣╚═╣║║╠═╝╠═╝║
 //		╚══╩══╩╝╚╝──╚╝─╚══╩╝─╚╩═══╩══╩══╩╝╚╩══╩══╝
-
-	SortClass(string );
-	auto divide()->void;
-	auto size(string )->size_t;
-	auto makeBlocks(string )->void;
-	auto  sort()->void;
-	auto writeSorted(string )->void;
-	auto deleteTmp()->void;
-	~SortClass();
 class ClassSort {
 public:
 	ClassSort(string name_main_file, size_t tmp_size);//открытие файла
