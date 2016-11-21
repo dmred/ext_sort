@@ -36,7 +36,7 @@ public:
 	auto toSort()->void;//сортировка всех блоков
 	auto writeSorted(string )->void;//запись сортированных данных в файл
 	auto deleteTmps()->void;//удаление временных файлов
-	auto fio() -> const bool; //открытый
+	auto fio() -> const bool; //isOpened
 	~ClassSort();//destr
 private:
 	fstream file;
@@ -49,6 +49,7 @@ private:
 };
 
 ClassSort::~ClassSort() {
+	//cout <<"destr"<<endl;
 	file_names.clear();
 }
 
@@ -69,6 +70,7 @@ auto ClassSort::makeTmp(string name_file)->void {
 		temp << i;
 		if (i != *(lines.end()--)) temp << endl;
 	}
+	//cout <<"maketmps"<<endl;
 	temp.close();
 	lines.clear();
 }
@@ -112,9 +114,8 @@ auto ClassSort::toSort()->void {
 	while (!pq.empty()) {
 		A ff = pq.top();
 		pq.pop();
-		if (ff.str != "")file1 << ff.str << endl;
-
-		if (!streams[ff.index].eof())
+		if (ff.str != "") file1 << ff.str << endl;
+		if (streams[ff.index].eof()==flase)
 		{
 			getline(streams[ff.index], ff.str);
 			pq.push(ff);
@@ -131,8 +132,6 @@ auto ClassSort::divide()->void {
 	while (!file.eof()) {
 		getline(file, line_of_file);
 		temp_size_files += line_of_file.size();
-
-
 		if (temp_size_files <= tmp) {
 			lines.push_back(line_of_file);
 		}
