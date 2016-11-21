@@ -113,7 +113,6 @@ auto ClassSort::toSort()->void {
 		A ff(str, i);
 		pq.push(ff);
 	}
-
 	while (!pq.empty()) {
 		A ff = pq.top();
 		pq.pop();
