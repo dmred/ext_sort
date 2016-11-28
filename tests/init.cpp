@@ -28,7 +28,7 @@ SCENARIO("ext1", "[in100]")
 
 SCENARIO("ext2", "[in20k]")
 {
-  sorting("in100.txt", "output20000k.txt", 4);
+  sorting("in100.txt", "output20000k.txt", 64);
 	string *str1 = new string[20000], *str2 = new string[20000];
 	bool flag = false;
 	ifstream f1("output20000k.txt"), f2("test20000k.txt");
