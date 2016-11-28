@@ -11,7 +11,6 @@ SCENARIO("8mb", "[8mb]"){
  sorting("8.txt","8out.txt",4);
  ifstream hay("8out.txt");
 ifstream file("test8.txt");
-
 int i=0;
  bool p=true;
  string s1,s2;
@@ -37,7 +36,6 @@ SCENARIO("15mb", "[15mb]"){
  sorting("15.txt","15out.txt",4);
  ifstream hay("15out.txt");
 ifstream file("test15.txt");
-
 int i=0;
  bool p=true;
  string s1,s2;
@@ -58,3 +56,27 @@ getline(file,s1);
   REQUIRE(p==true);
 }
 
+SCENARIO("32mb", "[32mb]"){
+ setlocale(LC_ALL, "Russian");
+ sorting("32.txt","32out.txt",4);
+ ifstream hay("32out.txt");
+ifstream file("test32.txt");
+int i=0;
+ bool p=true;
+ string s1,s2;
+ while (!hay.eof()&&!file.eof()){
+getline(file,s1);
+ getline(hay,s2);
+  i++;
+  if (s1!=s2){
+  p=false;
+   cout<<i<<endl;
+   cout<<s1<<endl;
+   cout<<s2<<endl;
+   break;
+  }
+ }
+  file.close();
+ hay.close();
+  REQUIRE(p==true);
+}
