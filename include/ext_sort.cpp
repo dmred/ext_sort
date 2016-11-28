@@ -22,11 +22,11 @@ struct inp
 
 auto sorting(const std::string input_adress, const std::string output_adress, const unsigned int memory)
 {
-	std::ifstream fin("C:/Users/Dell/Documents/Visual Studio 2015/Projects/extended_sort/fix/8.txt", std::ios::binary);
-	//std::ifstream fin(input_adress, std::ios::binary);
+	//std::ifstream fin("C:/Users/Dell/Documents/Visual Studio 2015/Projects/extended_sort/fix/8.txt", std::ios::binary);
+	std::ifstream fin(input_adress, std::ios::binary);
 	if (fin.is_open() == false) throw ("Cant open ur file");
-	std::ofstream fout("C:/Users/Dell/Documents/Visual Studio 2015/Projects/extended_sort/fix/8out.txt", std::ios::binary);
-	//std::ofstream fout(output_adress, std::ios::binary);
+	//std::ofstream fout("C:/Users/Dell/Documents/Visual Studio 2015/Projects/extended_sort/fix/8out.txt", std::ios::binary);
+	std::ofstream fout(output_adress, std::ios::binary);
 	size_t num_buff = 0;
 	while (fin.eof() == false)
 	{
