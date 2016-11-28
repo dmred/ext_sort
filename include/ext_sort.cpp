@@ -23,18 +23,18 @@ struct inp
 
 auto sorting(const std::string input_adress, const std::string output_adress, const unsigned int memory)
 {
-	//std::ifstream fin("C:/Users/Dell/Documents/Visual Studio 2015/Projects/extended_sort/input700000k.txt");
-	std::ifstream fin(input_adress);
+	std::ifstream fin("C:/Users/Dell/Documents/Visual Studio 2015/Projects/extended_sort/input20000k.txt", std::ios::binary);
+	//std::ifstream fin(input_adress, std::ios::binary);
 	if (fin.is_open() == false) throw ("Cant open ur file");
-	//std::ofstream fout("C:/Users/Dell/Documents/Visual Studio 2015/Projects/extended_sort/output700000k.txt");
-	std::ofstream fout(output_adress);
+	std::ofstream fout("C:/Users/Dell/Documents/Visual Studio 2015/Projects/extended_sort/output20000k.txt", std::ios::binary);
+	//std::ofstream fout(output_adress, std::ios::binary);
 	size_t num_buff = 0;
 	while (fin.eof() == false)
 	{
 		std::string s;
-		std::ofstream buff(std::to_string(num_buff+1) + ".txt");
+		std::ofstream buff(std::to_string(num_buff + 1) + ".txt", std::ios::binary);
 		std::deque<std::string> deque_;
-		for (unsigned int size = 0; (size + sizeof(std::string)) < memory*1024*1024; size += sizeof(std::string))
+		for (unsigned int size = 0; (size + 50) < memory * 1024 * 1024; size += 50)
 		{
 			std::getline(fin, s);
 			deque_.push_back(s);
@@ -51,7 +51,7 @@ auto sorting(const std::string input_adress, const std::string output_adress, co
 	std::priority_queue<inp> PriQue;
 	for (size_t i = 0; i < num_buff; ++i)
 	{
-		std::ifstream* f_ = new std::ifstream(std::to_string(i + 1) + ".txt");
+		std::ifstream* f_ = new std::ifstream(std::to_string(i + 1) + ".txt", std::ios::binary);
 		std::string str;
 		std::getline(*f_, str);
 		inp inp_(str, f_);
@@ -83,16 +83,16 @@ auto sorting(const std::string input_adress, const std::string output_adress, co
 	fout.close();
 }
 
-// void main(){
-// 	std::string in, out;
-// 	unsigned long int memory_size;
-// 	std::cout << "input path: "; std::cin >> in;
-// 	std::cout << "output path: "; std::cin >> out;
-// 	std::cout << "write memory(mb): "; std::cin >> memory_size;
-// 	std::chrono::time_point<std::chrono::system_clock> start, end;
-// 	start = std::chrono::system_clock::now();
-// 	sorting(in, out, memory_size);
-// 	end = std::chrono::system_clock::now();
-// 	std::cout << (end - start).count()<< std::endl; 
-// 	system("pause");
-// }
+void main(){
+ 	std::string in, out;
+ 	unsigned long int memory_size;
+ 	std::cout << "input path: "; std::cin >> in;
+ 	std::cout << "output path: "; std::cin >> out;
+ 	std::cout << "write memory(mb): "; std::cin >> memory_size;
+ 	std::chrono::time_point<std::chrono::system_clock> start, end;
+ 	start = std::chrono::system_clock::now();
+ 	sorting(in, out, memory_size);
+ 	end = std::chrono::system_clock::now();
+ 	std::cout << (end - start).count()<< std::endl; 
+ 	system("pause");
+ }
