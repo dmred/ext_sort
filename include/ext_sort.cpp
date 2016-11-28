@@ -19,6 +19,7 @@ struct inp
 	}
 };
 
+
 auto sorting(const std::string input_adress, const std::string output_adress, const unsigned int memory)
 {
 	std::ifstream fin("C:/Users/Dell/Documents/Visual Studio 2015/Projects/extended_sort/fix/8.txt", std::ios::binary);
