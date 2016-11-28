@@ -8,7 +8,7 @@ using namespace std;
  
 SCENARIO("8mb", "[8mb]"){
  setlocale(LC_ALL, "Russian");
- sorting("8.txt","8out.txt",1);
+ sorting("8.txt","8out.txt",4);
  ifstream hay("8out.txt");
 ifstream file("test8.txt");
 
