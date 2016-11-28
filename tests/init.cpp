@@ -6,7 +6,7 @@
 
 using namespace std;
 
-SCENARIO("ext", "[in100]")
+SCENARIO("ext1", "[in100]")
 {
   sorting("in100.txt", "out100.txt", 2);
 	string *str1 = new string[100], *str2 = new string[100];
@@ -26,7 +26,7 @@ SCENARIO("ext", "[in100]")
   REQUIRE(flag);
 } 
 
-SCENARIO("ext", "[in20k]")
+SCENARIO("ext2", "[in20k]")
 {
   sorting("in100.txt", "out20k.txt", 4);
 	string *str1 = new string[20000], *str2 = new string[20000];
