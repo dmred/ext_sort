@@ -1,152 +1,96 @@
-#include <iostream> 
-#include <fstream> 
-#include <string> 
+// extended_sort.cpp: определяет точку входа для консольного приложения.
+//
+
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
 #include <algorithm>
-#include <vector> 
-#include <locale> 
-#include <queue> 
-#include <iterator> 
-#include <stdlib.h>
+#include <queue>
+#include <deque>
 
-using namespace std;
-
-struct STR {
-public:
-	int index;
-	string str;
-	STR(string s, size_t i) : str(s), index(i) {}
-	bool operator < (const STR& s) const
+struct inp
+{
+	std::string st;
+	std::ifstream *file;
+	inp(const std::string& st_, std::ifstream* file_) : st(st_), file(file_) {}
+	bool operator < (const inp& input) const
 	{
-		return (str > s.str);
+		return (st > input.st);
 	}
 };
 
-//		╔══╦══╦═══╦════╦══╦╗─╔╦═══╦══╦╗─╔══╦══╦══╗
-//		║╔═╣╔╗║╔═╗╠═╗╔═╩╗╔╣╚═╝║╔══╣╔═╣║─║╔╗║╔═╣╔═╝
-//		║╚═╣║║║╚═╝║─║║──║║║╔╗─║║╔═╣║─║║─║╚╝║╚═╣╚═╗
-//		╚═╗║║║║╔╗╔╝─║║──║║║║╚╗║║╚╗║║─║║─║╔╗╠═╗╠═╗║
-//		╔═╝║╚╝║║║║──║║─╔╝╚╣║─║║╚═╝║╚═╣╚═╣║║╠═╝╠═╝║
-//		╚══╩══╩╝╚╝──╚╝─╚══╩╝─╚╩═══╩══╩══╩╝╚╩══╩══╝
-class ClassSort {
-public:
-	ClassSort(string name_main_file, size_t tmp_size);//открытие файла
-	auto divide()->void; // разделение на блоки
-	auto fileSize(string )->size_t;//размер файла
-	auto makeTmp(string )->void;//создание блоков
-	auto toSort()->void;//сортировка всех блоков
-	auto writeSorted(string )->void;//запись сортированных данных в файл
-	auto deleteTmps()->void;//удаление временных файлов
-	auto fio() -> const bool; //isOpened
-	~ClassSort();//destr
-private:
-	fstream file;
-	size_t tmp;
-	size_t countTmps;
-	size_t closedFiles;
-	vector<string> lines;
-	vector<string> file_names;
-	priority_queue<A> pq;
-};
-
-ClassSort::~ClassSort() {
-	//cout <<"destr"<<endl;
-	file_names.clear();
-}
-
-auto ClassSort::ClassSort(string name_main_file, size_t tmp_size) :file(name_main_file), tmp(tmp_size), countTmps(0), closedFiles(0) {
-	if (file.is_open()) {
-		divide();
-	}
-};
-
-auto ClassSort::fio() -> const bool{return (file.is_open());}
-
-auto ClassSort::makeTmp(string name_file)->void {
-	file_names.push_back(name_file);
-	std::sort(lines.begin(), lines.end());
-	ofstream temp(name_file);
-	for (auto i : lines)
+auto sorting(const std::string input_adress, const std::string output_adress, const unsigned int memory)
+{
+	std::ifstream fin("C:/Users/Dell/Documents/Visual Studio 2015/Projects/extended_sort/in.txt");
+	//std::ifstream fin(input_adress);
+	if (fin.is_open() == false) throw ("Cant open ur file");
+	std::ofstream fout("C:/Users/Dell/Documents/Visual Studio 2015/Projects/extended_sort/out.txt");
+	//std::ofstream fout(output_adress);
+	size_t num_buff = 0;
+	while (fin.eof() == false)
 	{
-		temp << i;
-		if (i != *(lines.end()--)) temp << endl;
-	}
-	//cout <<"maketmps"<<endl;
-	temp.close();
-	lines.clear();
-}
-
-auto ClassSort::fileSize(string name_file)->size_t {
-	long fsize;
-	ifstream temp(name_file);
-	temp.seekg(0, ios::end);
-	fsize = temp.tellg();
-	temp.close();
-	return fsize;
-}
-
-auto ClassSort::writeSorted(string line)->void {
-	ofstream file("out.txt", ios::app);
-	file << line << endl;
-	file.close();
-}
-
-auto ClassSort::deleteTmps()->void {
-	for (int i = 0; i < file_names.size(); ++i) {
-		if (remove(file_names[i].c_str()) == -1) {
-			throw;
-		}
-		else {
-			cout << "Gj";
-		}
-	}
-}
-
-auto ClassSort::toSort()->void {
-	ofstream file1("out.txt");
-	string str;
-	ifstream *streams = new ifstream[countTmps];
-	for (int i = 0; i < countTmps; ++i) {
-		streams[i].open(file_names[i]);
-		getline(streams[i], str);
-		A ff(str, i);
-		pq.push(ff);
-	}
-	while (!pq.empty()) {
-		A ff = pq.top();
-		pq.pop();
-		if (ff.str != "") file1 << ff.str << endl;
-		if (streams[ff.index].eof()==flase)
+		std::string s;
+		std::ofstream buff(std::to_string(num_buff+1) + ".txt");
+		//std::vector<std::string> vector_;
+		std::deque<std::string> deque_;
+		for (unsigned int size = 0; (size + sizeof(std::string)) <= memory; size += sizeof(std::string))
 		{
-			getline(streams[ff.index], ff.str);
-			pq.push(ff);
+			std::getline(fin, s);
+			//vector_.push_back(s);
+			deque_.push_back(s);
+		}
+		//std::sort(vector_.begin(), vector_.end());
+		std::sort(deque_.begin(), deque_.end());
+		for (auto i : deque_)
+		{
+			if (i != "") buff << i << std::endl;
+		}
+		num_buff++;
+		buff.close();
+	}
+	fin.close();
+	std::priority_queue<inp> PriQue;
+	for (size_t i = 0; i < num_buff; ++i)
+	{
+		std::ifstream* f_ = new std::ifstream(std::to_string(i + 1) + ".txt");
+		std::string str;
+		std::getline(*f_, str);
+		inp inp_(str, f_);
+		PriQue.push(inp_);
+	}
+	while (PriQue.empty() == false)
+	{
+		inp inp_ = PriQue.top();
+		PriQue.pop();
+		if (inp_.st != "")
+		{
+			fout << inp_.st;
+			fout << std::endl;
+		}
+		if (!(*inp_.file).eof())
+		{
+			getline(*inp_.file, inp_.st);
+			PriQue.push(inp_);
+		}
+		else
+		{
+			(*(inp_.file)).close();
 		}
 	}
-	for (int i = 0; i < countTmps; ++i) streams[i].close();
-	deleteTmps();
-	file1.close();
+	for (size_t i = 0; i < num_buff; ++i)
+	{
+		remove((std::to_string(i + 1) + ".txt").c_str());
+	}
+	fout.close();
 }
 
-auto ClassSort::divide()->void {
-	string line_of_file;
-	size_t temp_size_files = 0;
-	while (!file.eof()) {
-		getline(file, line_of_file);
-		temp_size_files += line_of_file.size();
-		if (temp_size_files <= tmp) {
-			lines.push_back(line_of_file);
-		}
-		else {
-			countTmps++;
-			makeTmp(to_string(countTmps) + ".txt");
-			lines.push_back(line_of_file);
-			temp_size_files = line_of_file.size();
-		}
-	}
-	file.close();
-
-	if (lines.size()) {
-		countTmps++;
-		makeTmp(to_string(countTmps) + ".txt");
-	}
-	toSort();
-}
+// void main(){
+// 	std::string in, out;
+// unsigned long int memory_size;
+// std::cout << "input_name: "; std::cin >> in;
+// std::cout << "output_name: "; std::cin >> out;
+// std::cout << "free memory(bytes): "; std::cin >> memory_size;
+// sorting(in, out, memory_size);
+// system("pause");
+// }
