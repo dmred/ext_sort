@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <queue>
 #include <deque>
+#include <chrono>
 
 struct inp
 {
@@ -22,10 +23,10 @@ struct inp
 
 auto sorting(const std::string input_adress, const std::string output_adress, const unsigned int memory)
 {
-	std::ifstream fin("C:/Users/Dell/Documents/Visual Studio 2015/Projects/extended_sort/in.txt");
+	std::ifstream fin("C:/Users/Dell/Documents/Visual Studio 2015/Projects/extended_sort/input700000k.txt");
 	//std::ifstream fin(input_adress);
 	if (fin.is_open() == false) throw ("Cant open ur file");
-	std::ofstream fout("C:/Users/Dell/Documents/Visual Studio 2015/Projects/extended_sort/out.txt");
+	std::ofstream fout("C:/Users/Dell/Documents/Visual Studio 2015/Projects/extended_sort/output700000k.txt");
 	//std::ofstream fout(output_adress);
 	size_t num_buff = 0;
 	while (fin.eof() == false)
@@ -80,17 +81,22 @@ auto sorting(const std::string input_adress, const std::string output_adress, co
 	}
 	for (size_t i = 0; i < num_buff; ++i)
 	{
-		remove((std::to_string(i + 1) + ".txt").c_str());
+		remove((std::to_string(i + 1) + ".txt").data());
 	}
 	fout.close();
 }
 
 // void main(){
 // 	std::string in, out;
-// unsigned long int memory_size;
-// std::cout << "input_name: "; std::cin >> in;
-// std::cout << "output_name: "; std::cin >> out;
-// std::cout << "free memory(bytes): "; std::cin >> memory_size;
-// sorting(in, out, memory_size);
-// system("pause");
+// 	unsigned long int memory_size;
+// 	std::cout << "input path: "; std::cin >> in;
+// 	std::cout << "output path: "; std::cin >> out;
+// 	std::cout << "write memory(mb): "; std::cin >> memory_size;
+// 	memory_size *= 1024;
+// 	std::chrono::time_point<std::chrono::system_clock> start, end;
+// 	start = std::chrono::system_clock::now();
+// 	sorting(in, out, memory_size);
+// 	end = std::chrono::system_clock::now();
+// 	std::cout << (end - start).count()<< std::endl; 
+// 	system("pause");
 // }
