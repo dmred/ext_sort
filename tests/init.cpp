@@ -28,20 +28,20 @@ SCENARIO("ext1", "[in100]")
 
 SCENARIO("ext2", "[in20k]")
 {
-  sorting("in100.txt", "output20000k.txt", 64);
+  sorting("in100.txt", "output20000k.txt", 16);
 	string *str1 = new string[20000], *str2 = new string[20000];
 	bool flag = false;
 	ifstream f1("output20000k.txt"), f2("test20000k.txt");
-	for (int i = 0; i < 20000; ++i)
+	for (int i = 0; i < 4000; ++i)
 	{
 		getline(f1, str1[i]);
 		getline(f2, str2[i]);
 	}
 	size_t st = 0;
-	for (int i = 0; i < 20000; ++i)
+	for (int i = 0; i < 4000; ++i)
 	{
 		if (str1[i] == str2[i]) ++st;
 	}
-	if (st == 20000) flag = true;
+	if (st == 4000) flag = true;
   REQUIRE(flag);
 } 
