@@ -25,3 +25,23 @@ SCENARIO("ext", "[in100]")
 	if (st == 100) flag = true;
   REQUIRE(flag);
 } 
+
+SCENARIO("ext", "[in20k]")
+{
+  sorting("in100.txt", "out20k.txt", 4);
+	string *str1 = new string[20000], *str2 = new string[20000];
+	bool flag = false;
+	ifstream f1("out20k.txt"), f2("test20000k.txt");
+	for (int i = 0; i < 20000; ++i)
+	{
+		getline(f1, str1[i]);
+		getline(f2, str2[i]);
+	}
+	size_t st = 0;
+	for (int i = 0; i < 20000; ++i)
+	{
+		if (str1[i] == str2[i]) ++st;
+	}
+	if (st == 20000) flag = true;
+  REQUIRE(flag);
+} 
