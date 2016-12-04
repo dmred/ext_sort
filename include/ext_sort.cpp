@@ -11,6 +11,8 @@
 #include <chrono>
 #include <ctime>
 
+
+
 struct line
 {
 	std::string name;
@@ -54,7 +56,7 @@ struct inp
 {
 	line st;
 	std::ifstream *file;
-	inp(const line& st_, std::ifstream* file_) : st(st_), file(f_) {}
+	inp(const line& st_, std::ifstream* file_) : st(st_), file(file_) {}
 };
 
 
@@ -74,15 +76,15 @@ auto sorting(const std::string input_adress, const std::string output_adress, co
 	size_t num_buff = 0;
 	while (fin.eof() == false)
 	{
-		line s;
+		line st;
 		std::ofstream buff(std::to_string(num_buff + 1) + ".txt", std::ios::binary);
-		std::deque<std::string> deque_;
+		std::deque<line> deque_;
 		for (unsigned int size = 0; (size + 50) < memory * 1024 * 1024; size += 50)
 		{
-			if (!fin.eof() && (fin >> s) && (s != ""))  deque_.push_back(s);
-			size += s.size();
+			if (!fin.eof() && (fin >> st) && (st != ""))  deque_.push_back(st);
+			size += st.size();
 			// 			std::getline(fin, s);
-			// 			deque_.push_back(s);
+				//	deque_.push_back(s);
 		}
 		std::sort(deque_.begin(), deque_.end());
 		for (auto i : deque_)
