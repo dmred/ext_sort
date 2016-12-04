@@ -8,16 +8,57 @@
 #include <chrono>
 #include <ctime>
 
-struct inp
+struct line
 {
-	std::string st;
-	std::ifstream *file;
-	inp(const std::string& st_, std::ifstream* file_) : st(st_), file(file_) {}
-	bool operator < (const inp& input) const
+	string name;
+	string surname;
+	short year;
+	size_t size() const
 	{
-		return (st > input.st);
+		size_t sz=sizeof(string);
+		return (sz + name.size() + sz + surname.size() + year.size);
 	}
 };
+
+bool operator < (const line& line1, const line& line2)
+{
+	return (line1.name < line2.name);
+}
+
+bool operator >(const line& line1, const line& line2)
+{
+	return (line1.name > line2.name);
+}
+
+ostream & operator<<(ostream & output, line const & str)
+{
+	output << str.surname << " " << str.name << " " << str.year;
+	return output;
+}
+
+istream & operator>>(istream & input, line & str)
+{
+	input >> str.surname >> str.name >> str.year;
+	return input;
+}
+
+bool operator != (const line& line_, const string& string_)
+{
+	return (line_.surname != string_);
+}
+
+struct inp
+{
+	line st;
+	ifstream *file;
+	inp(const line& st_, ifstream* file_) : st(st_), file(f_){}
+};
+
+
+bool operator < (const inp& inp_1, const inp& inp_2)
+{
+	return (inp_1.s > inp_2.s);
+}
 
 
 auto sorting(const std::string input_adress, const std::string output_adress, const unsigned int memory)
@@ -30,13 +71,15 @@ auto sorting(const std::string input_adress, const std::string output_adress, co
 	size_t num_buff = 0;
 	while (fin.eof() == false)
 	{
-		std::string s;
+		line s;
 		std::ofstream buff(std::to_string(num_buff + 1) + ".txt", std::ios::binary);
 		std::deque<std::string> deque_;
 		for (unsigned int size = 0; (size + 50) < memory * 1024 * 1024; size += 50)
 		{
-			std::getline(fin, s);
-			deque_.push_back(s);
+			if (!fin.eof() && (fin >> s) && (s != ""))  deque_.push_back(s);
+			size += s.size();
+// 			std::getline(fin, s);
+// 			deque_.push_back(s);
 		}
 		std::sort(deque_.begin(), deque_.end());
 		for (auto i : deque_)
@@ -51,8 +94,8 @@ auto sorting(const std::string input_adress, const std::string output_adress, co
 	for (size_t i = 0; i < num_buff; ++i)
 	{
 		std::ifstream* f_ = new std::ifstream(std::to_string(i + 1) + ".txt", std::ios::binary);
-		std::string str;
-		std::getline(*f_, str);
+		line str;
+		*f_ >> str;
 		inp inp_(str, f_);
 		PriQue.push(inp_);
 	}
@@ -62,12 +105,10 @@ auto sorting(const std::string input_adress, const std::string output_adress, co
 		PriQue.pop();
 		if (inp_.st != "")
 		{
-			fout << inp_.st;
-			fout << std::endl;
+			fout << inp_.s << endl;
 		}
-		if (!(*inp_.file).eof())
+		if (!(*inp_.file).eof() && (*inp_.f >> inp_.s))
 		{
-			getline(*inp_.file, inp_.st);
 			PriQue.push(inp_);
 		}
 		else
