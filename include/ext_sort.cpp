@@ -1,3 +1,6 @@
+// ext_sort_name.cpp: определяет точку входа для консольного приложения.
+//
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -10,13 +13,13 @@
 
 struct line
 {
-	string name;
-	string surname;
+	std::string name;
+	std::string surname;
 	short year;
 	size_t size() const
 	{
-		size_t sz=sizeof(string);
-		return (sz + name.size() + sz + surname.size() + year.size);
+		size_t sz = sizeof(std::string);
+		return (sz + name.size() + sz + surname.size() + sizeof(year));
 	}
 };
 
@@ -30,19 +33,19 @@ bool operator >(const line& line1, const line& line2)
 	return (line1.name > line2.name);
 }
 
-ostream & operator<<(ostream & output, line const & str)
+std::ostream & operator<<(std::ostream & output, line const & str)
 {
 	output << str.surname << " " << str.name << " " << str.year;
 	return output;
 }
 
-istream & operator>>(istream & input, line & str)
+std::istream & operator >> (std::istream & input, line & str)
 {
 	input >> str.surname >> str.name >> str.year;
 	return input;
 }
 
-bool operator != (const line& line_, const string& string_)
+bool operator != (const line& line_, const std::string& string_)
 {
 	return (line_.surname != string_);
 }
@@ -50,14 +53,14 @@ bool operator != (const line& line_, const string& string_)
 struct inp
 {
 	line st;
-	ifstream *file;
-	inp(const line& st_, ifstream* file_) : st(st_), file(f_){}
+	std::ifstream *file;
+	inp(const line& st_, std::ifstream* file_) : st(st_), file(f_) {}
 };
 
 
 bool operator < (const inp& inp_1, const inp& inp_2)
 {
-	return (inp_1.s > inp_2.s);
+	return (inp_1.st > inp_2.st);
 }
 
 
@@ -78,8 +81,8 @@ auto sorting(const std::string input_adress, const std::string output_adress, co
 		{
 			if (!fin.eof() && (fin >> s) && (s != ""))  deque_.push_back(s);
 			size += s.size();
-// 			std::getline(fin, s);
-// 			deque_.push_back(s);
+			// 			std::getline(fin, s);
+			// 			deque_.push_back(s);
 		}
 		std::sort(deque_.begin(), deque_.end());
 		for (auto i : deque_)
@@ -105,9 +108,9 @@ auto sorting(const std::string input_adress, const std::string output_adress, co
 		PriQue.pop();
 		if (inp_.st != "")
 		{
-			fout << inp_.s << endl;
+			fout << inp_.st << std::endl;
 		}
-		if (!(*inp_.file).eof() && (*inp_.f >> inp_.s))
+		if (!(*inp_.file).eof() && (*inp_.file >> inp_.st))
 		{
 			PriQue.push(inp_);
 		}
@@ -124,18 +127,19 @@ auto sorting(const std::string input_adress, const std::string output_adress, co
 }
 
 /*void main(){
- 	std::string in, out;
- 	unsigned long int memory_size;
- 	std::cout << "input path: "; std::cin >> in;
- 	std::cout << "output path: "; std::cin >> out;
- 	std::cout << "write memory(mb): "; std::cin >> memory_size;
-	std::chrono::time_point<std::chrono::system_clock> start, end;
-	start = std::chrono::system_clock::now();
- 	sorting(in, out, memory_size);
-	end = std::chrono::system_clock::now();
-	int elapsed_seconds = std::chrono::duration_cast<std::chrono::seconds>
-	(end - start).count();
-	std::time_t end_time = std::chrono::system_clock::to_time_t(end);
-	std::cout << "finished computation at " << std::ctime(&end_time) << "elapsed time: " << elapsed_seconds << "s\n";
- 	system("pause");
- }*/
+std::string in, out;
+unsigned long int memory_size;
+std::cout << "input path: "; std::cin >> in;
+std::cout << "output path: "; std::cin >> out;
+std::cout << "write memory(mb): "; std::cin >> memory_size;
+std::chrono::time_point<std::chrono::system_clock> start, end;
+start = std::chrono::system_clock::now();
+sorting(in, out, memory_size);
+end = std::chrono::system_clock::now();
+int elapsed_seconds = std::chrono::duration_cast<std::chrono::seconds>
+(end - start).count();
+std::time_t end_time = std::chrono::system_clock::to_time_t(end);
+std::cout << "finished computation at " << std::ctime(&end_time) << "elapsed time: " << elapsed_seconds << "s\n";
+system("pause");
+}
+*/
