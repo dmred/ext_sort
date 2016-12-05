@@ -38,7 +38,7 @@ SCENARIO("15mb", "[15mb]"){
  sorting("15.txt","15out_name.txt",4);
 bool x = true;
   ifstream f1("15out_name.txt"), f2("test15_name.txt");
-  stroka s1, s2;
+  line s1, s2;
   while(!f2.eof() && !f1.eof())
   {
     if((f1>>s1)&&(f2>>s2))
