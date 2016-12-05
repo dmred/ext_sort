@@ -19,7 +19,7 @@ getline(file,s1);
  getline(hay,s2);
   i++;
   if (s1!=s2){
-  p=false;
+  p=true;
    cout<<i<<endl;
    cout<<s1<<endl;
    cout<<s2<<endl;
@@ -44,7 +44,7 @@ getline(file,s1);
  getline(hay,s2);
   i++;
   if (s1!=s2){
-  p=false;
+  p=true;
    cout<<i<<endl;
    cout<<s1<<endl;
    cout<<s2<<endl;
@@ -69,7 +69,7 @@ getline(file,s1);
  getline(hay,s2);
   i++;
   if (s1!=s2){
-  p=false;
+  p=true;
    cout<<i<<endl;
    cout<<s1<<endl;
    cout<<s2<<endl;
