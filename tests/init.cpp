@@ -13,12 +13,12 @@ SCENARIO("8mb", "[8mb]"){
 ifstream file("test8_name.txt");
  int i=0;
  bool p=true;
- string s1,s2;
+ line s1,s2;
  while (!hay.eof()&&!file.eof()){
-getline(file,s1);
- getline(hay,s2);
+getline(file,s1.name);
+ getline(hay,s2.name);
   i++;
-  if (s1!=s2){
+  if (s1.name!=s2.name){
   p=false;
    cout<<i<<endl;
    cout<<s1<<endl;
