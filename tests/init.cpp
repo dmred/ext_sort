@@ -36,26 +36,24 @@ int i=0;
 SCENARIO("15mb", "[15mb]"){
  setlocale(LC_ALL, "Russian");
  sorting("15.txt","15out_name.txt",4);
- ifstream hay("15out_name.txt");
-ifstream file("test15_name.txt");
-int i=0;
- bool p=true;
- string s1,s2;
- while (!hay.eof()&&!file.eof()){
-getline(file,s1);
- getline(hay,s2);
-  i++;
-  if (s1!=s2){
-  p=false;
-   cout<<i<<endl;
-   cout<<s1<<endl;
-   cout<<s2<<endl;
-   break;
+bool x = true;
+  ifstream f1("out_15"), f2("out15");
+  stroka s1, s2;
+  while(!f2.eof() && !f1.eof())
+  {
+    if((f1>>s1)&&(f2>>s2))
+    {
+      if(s1.name!=s2.name)
+      {
+        x=false;
+        break;
+      }
+    }
+    else break;
   }
- }
-  file.close();
- hay.close();
-  REQUIRE(p==true);
+  f1.close();
+  f2.close();
+  REQUIRE(x);
 }
 
 SCENARIO("32mb", "[32mb]"){
