@@ -8,9 +8,9 @@ using namespace std;
  
 SCENARIO("8mb", "[8mb]"){
  setlocale(LC_ALL, "Russian");
- sorting("8.txt","8out.txt",4);
- ifstream hay("8out.txt");
-ifstream file("test8.txt");
+ sorting("8.txt","8out_name.txt",4);
+ ifstream hay("8out_name.txt");
+ifstream file("test8_name.txt");
 int i=0;
  bool p=true;
  string s1,s2;
@@ -33,9 +33,9 @@ getline(file,s1);
 
 SCENARIO("15mb", "[15mb]"){
  setlocale(LC_ALL, "Russian");
- sorting("15.txt","15out.txt",4);
- ifstream hay("15out.txt");
-ifstream file("test15.txt");
+ sorting("15.txt","15out_name.txt",4);
+ ifstream hay("15out_name.txt");
+ifstream file("test15_name.txt");
 int i=0;
  bool p=true;
  string s1,s2;
@@ -58,9 +58,9 @@ getline(file,s1);
 
 SCENARIO("32mb", "[32mb]"){
  setlocale(LC_ALL, "Russian");
- sorting("32.txt","32out.txt",4);
- ifstream hay("32out.txt");
-ifstream file("test32.txt");
+ sorting("32.txt","32out_name.txt",4);
+ ifstream hay("32out_name.txt");
+ifstream file("test32_name.txt");
 int i=0;
  bool p=true;
  string s1,s2;
