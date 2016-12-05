@@ -19,9 +19,6 @@ ifstream file("test8_name.txt");
    if(s1.name!=s2.name) 
    {
     p=false;
-    cout<<i<<endl;
-    cout<<s1<<endl;
-    cout<<s2<<endl;
     break;
   }
  }
