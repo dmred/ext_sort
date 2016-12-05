@@ -6,7 +6,7 @@
 #include <locale> 
 using namespace std;
  
-SCENARIO("8mb", "[8mb]"){
+/*SCENARIO("8mb", "[8mb]"){
  setlocale(LC_ALL, "Russian");
  sorting("8.txt","8out_name.txt",4);
  ifstream hay("8out_name.txt");
@@ -51,10 +51,10 @@ bool x = true;
   f2.close();
   REQUIRE(x);
 }
-
+*/
 SCENARIO("32mb", "[32mb]"){
  setlocale(LC_ALL, "Russian");
- sorting("32.txt","32out_name.txt",4);
+ sorting("32.txt","32out_name.txt",17);
  ifstream hay("32out_name.txt");
 ifstream file("test32_name.txt");
 int i=0;
