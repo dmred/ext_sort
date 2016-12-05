@@ -9,26 +9,25 @@ using namespace std;
 SCENARIO("8mb", "[8mb]"){
  setlocale(LC_ALL, "Russian");
  sorting("8.txt","8out_name.txt",1);
- ifstream file("8out_name.txt");
+ ifstream file("test8_name.txt");
 ifstream hay("test8_name.txt");
 int i=0;
  bool p=true;
- line l1,l2;
  string s1,s2;
  while (!hay.eof()&&!file.eof()){
-getline(file,l1);
- getline(hay,l2);
+ getline(file,s1);
+ getline(hay,s2);
   i++;
-  if (l1.name!=l2.name){
+  if (s1!=s2){
   p=false;
    cout<<i<<endl;
-   cout<<l1.name<<endl;
-   cout<<l2.name<<endl;
+   cout<<s1<<endl;
+   cout<<s2<<endl;
    break;
   }
  }
   file.close();
- hay.close();
+  hay.close();
   REQUIRE(p==true);
 }
 
