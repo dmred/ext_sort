@@ -13,13 +13,18 @@ SCENARIO("8mb", "[8mb]"){
 ifstream f2("test8_name.txt");
  line s1, s2;
  bool x = true;
+ int i=0;
   while(!f2.eof() && !f1.eof())
   {
+   i++;
     if((f1>>s1)&&(f2>>s2))
     {
       if(s1.name!=s2.name)
       {
         x=false;
+        cout<<i<<endl;
+        cout<<s1<<endl;
+        cout<<s2<<endl;
         break;
       }
     }
