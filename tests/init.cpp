@@ -28,6 +28,7 @@ ifstream f2("test8_name.txt");
   f1.close();
   f2.close();
   REQUIRE(x);
+}
 
 SCENARIO("15mb", "[15mb]"){
  setlocale(LC_ALL, "Russian");
