@@ -12,6 +12,7 @@ SCENARIO("8mb", "[8mb]"){
  ifstream f1("8out_name.txt");
 ifstream f2("test8_name.txt");
  line s1, s2;
+ bool x = true;
   while(!f2.eof() && !f1.eof())
   {
     if((f1>>s1)&&(f2>>s2))
