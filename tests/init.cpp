@@ -11,30 +11,27 @@ SCENARIO("8mb", "[8mb]"){
  sorting("8.txt","8out_name.txt",1);
  ifstream f1("8out_name.txt");
 ifstream f2("test8_name.txt");
- line s1, s2;
- bool x = true;
- int i=0;
-  while(!f2.eof() && !f1.eof())
-  {
-   i++;
-    if((f1>>s1)&&(f2>>s2))
-    {
-       ++i;
-      if(s1.name!=s2.name)
-      {
-        x=false;
-        cout<<i<<endl;
-        cout<<s1<<endl;
-        cout<<s2<<endl;
-        break;
-      }
-    }
-    else break;
+int i=0;
+ bool p=true;
+ line l1,l2;
+ string s1,s2;
+ while (!hay.eof()&&!file.eof()){
+getline(file,l1);
+ getline(hay,l2);
+  i++;
+  if (l1.name!=l2.name){
+  p=false;
+   cout<<i<<endl;
+   cout<<l1.name<<endl;
+   cout<<l2.name<<endl;
+   break;
   }
-  f1.close();
-  f2.close();
-  REQUIRE(x);
+ }
+  file.close();
+ hay.close();
+  REQUIRE(p==true);
 }
+
 
 SCENARIO("15mb", "[15mb]"){
  setlocale(LC_ALL, "Russian");
