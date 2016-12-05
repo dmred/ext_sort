@@ -19,6 +19,7 @@ ifstream f2("test8_name.txt");
    i++;
     if((f1>>s1)&&(f2>>s2))
     {
+       ++i;
       if(s1.name!=s2.name)
       {
         x=false;
