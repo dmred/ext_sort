@@ -13,22 +13,24 @@ SCENARIO("8mb", "[8mb]"){
 ifstream file("test8_name.txt");
 int i=0;
  bool p=true;
- string s1,s2;
+ line s1,s2;
  while (!hay.eof()&&!file.eof()){
-getline(file,s1);
- getline(hay,s2);
-  i++;
-  if (s1!=s2){
-  p=true;
-   cout<<i<<endl;
-   cout<<s1<<endl;
-   cout<<s2<<endl;
-   break;
+  if((file>>s1)&&(hay>>s2))
+  {
+   if(s1.name!=s2.name) 
+   {
+    p=false;
+    cout<<i<<endl;
+    cout<<s1<<endl;
+    cout<<s2<<endl;
+    break;
   }
  }
-  file.close();
+ else break;
+ }
+ file.close();
  hay.close();
-  REQUIRE(p==true);
+ REQUIRE(p==true);
 }
 
 SCENARIO("15mb", "[15mb]"){
@@ -44,7 +46,7 @@ getline(file,s1);
  getline(hay,s2);
   i++;
   if (s1!=s2){
-  p=true;
+  p=false;
    cout<<i<<endl;
    cout<<s1<<endl;
    cout<<s2<<endl;
@@ -69,7 +71,7 @@ getline(file,s1);
  getline(hay,s2);
   i++;
   if (s1!=s2){
-  p=true;
+  p=false;
    cout<<i<<endl;
    cout<<s1<<endl;
    cout<<s2<<endl;
