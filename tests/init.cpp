@@ -37,7 +37,7 @@ SCENARIO("15mb", "[15mb]"){
  setlocale(LC_ALL, "Russian");
  sorting("15.txt","15out_name.txt",4);
 bool x = true;
-  ifstream f1("out_15"), f2("out15");
+  ifstream f1("15out_name.txt"), f2("test15_name.txt");
   stroka s1, s2;
   while(!f2.eof() && !f1.eof())
   {
