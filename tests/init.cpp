@@ -11,7 +11,6 @@ SCENARIO("8mb", "[8mb]"){
  sorting("8.txt","8out_name.txt",4);
  ifstream hay("8out_name.txt");
 ifstream file("test8_name.txt");
-int i=0;
  bool p=true;
  line s1,s2;
  while (!hay.eof()&&!file.eof()){
@@ -80,3 +79,4 @@ getline(file,s1);
  hay.close();
   REQUIRE(p==true);
 }
+
