@@ -56,7 +56,7 @@ SCENARIO("32mb", "[32mb]"){
  setlocale(LC_ALL, "Russian");
  sorting("32.txt","32out_name.txt",17);
  ifstream hay("32out_name.txt");
-ifstream file("test32_name.txt");
+ifstream file("32out_name.txt");
 int i=0;
  bool p=true;
  string s1,s2;
